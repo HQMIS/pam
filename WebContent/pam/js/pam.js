@@ -31,9 +31,20 @@ function _audio(mode, res) {
 	 * else when mode equals 0, we should use diy audio
 	 */
 	if (1 == mode) {
+		//alert(window.location.href); 
+		/* audio list on server */
+		//var audioList = ["pam/audio/snq", "pam/audio/qg", "pam/audio/xy"]; /* the final goal is get the list from server */
+		var url = "http://121.199.46.162/work/pam/";
+		var audioList = [url+"snq", url+"qg", url+"xy"]; 
+		
 		if (Sys.ie) {
 			//document.write('<bgsound src="' + res[0] + '.mp3" loop="-1">');
 		} else {
+			if ("1" == res){  /* order play the audio on server */
+				broadcastList(audioList);
+			} else {  /* order play the audio on server */
+				broadcastList(audioList[Math.floor(Math.random()*res.length)]);
+			}
 			//document.write('<audio class="audio" controls="controls" preload="auto" autoplay="autoplay" loop="loop" id="_audio"><source src="'+ res + '.ogg" type="audio/ogg"><source src="' + res + '.mp3" type="audio/mpeg"></audio>');
 		}
 	} else {
@@ -73,42 +84,53 @@ function _audio(mode, res) {
 			var object = document.body.appendChild(_bgsound);
 			//document.write('<bgsound src="' + res[0] + '.mp3" loop="-1">');
 		} else {
-			/* i is the index of resource array */
-			var i = 0;
-			/* create audio */
-			var _audio = document.createElement("audio");
-
-			/**
-			 * judge the audio and deal with 
-			 * if auido is null or not can play, show the notice
-			 * else deal with the request
-			 */
-			if (_audio != null && _audio.canPlayType) {
-				/* append audio to body */
-				var object = document.body.appendChild(_audio);
-
-				/* broadcat res[i] through audio */
-				broadcast(_audio, res[i]);
-
-				/* add the callback function addEventListener to audio's object */
-				_audio.addEventListener('ended', function() {
-					/* judge the index of the audio to be broadcast */
-					i = i + 1;
-					if (i >= res.length) {
-						i = 0;
-					}
-
-					/* broadcat res[i] through audio */
-					broadcast(_audio, res[i]);
-				}, false);
-			} else {
-				var _notice = document.createElement("div");
-				_notice.innerText = "您现在使用的浏览器不支持audio标签";
-				var object = document.body.appendChild(_notice);
-				//document.write("您现在使用的浏览器不支持audio标签");
-			}
+			broadcastList(res);
 		}
 		//document.write('<audio class="audio" controls="controls" preload="auto" autoplay="autoplay" id="_audio" onended="broadcast(res);"><source src="' + res[i] + '.ogg" type="audio/ogg"><source src="' + res[i] + '.mp3" type="audio/mpeg"></audio>');
+	}
+}
+
+/**
+ * @description broadcast audio by list
+ * 
+ * @param {String} res
+ *            the audio list to be broadcast
+ * @return {null} null
+ */
+function broadcastList(res){
+	/* i is the index of resource array */
+	var i = 0;
+	/* create audio */
+	var _audio = document.createElement("audio");
+
+	/**
+	 * judge the audio and deal with 
+	 * if auido is null or not can play, show the notice
+	 * else deal with the request
+	 */
+	if (_audio != null && _audio.canPlayType) {
+		/* append audio to body */
+		var object = document.body.appendChild(_audio);
+
+		/* broadcat res[i] through audio */
+		broadcast(_audio, res[i]);
+
+		/* add the callback function addEventListener to audio's object */
+		_audio.addEventListener('ended', function() {
+			/* judge the index of the audio to be broadcast */
+			i = i + 1;
+			if (i >= res.length) {
+				i = 0;
+			}
+
+			/* broadcat res[i] through audio */
+			broadcast(_audio, res[i]);
+		}, false);
+	} else {
+		var _notice = document.createElement("div");
+		_notice.innerText = "您现在使用的浏览器不支持audio标签";
+		var object = document.body.appendChild(_notice);
+		//document.write("您现在使用的浏览器不支持audio标签");
 	}
 }
 

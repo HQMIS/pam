@@ -16,10 +16,10 @@
 
 	<body>
 		<script>
-			//var res = ["pam/audio/music", "pam/audio/test"];
-			var res = ["music/music"];
-			_audio(0, res); /* 自定义res */
-			/* _audio(1, "1"); *//* 使用Server，0 - 单？1 - 多？ */
+			//var res = ["music/music", "music/snq"];
+			//var res = ["music/music"];
+			//_audio(0, res); /* 自定义res */
+			_audio(1, "1"); /* 使用Server，0 - 单？1 - 多？ */
 		</script>
 	</body>
 </html>
