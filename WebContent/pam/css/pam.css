@@ -7,10 +7,6 @@
 	display: block;
 }
 
-body { /* background: url(../picture/tyr.jpg) */
-	
-}
-
 /* set the style of the div which is used to contain the background img */
 div.bgDiv {
 	position: fixed;
@@ -24,6 +20,23 @@ div.bgDiv {
 /* set the style of the background img */
 div.bgDiv>img {
 	height: 100%;
+	width: 100%;
+	border: 0;
+}
+
+/* set the style of the div which is used to contain the background movie */
+div.movieDiv {
+	position: fixed;
+	top: -50px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -88888888;
+}
+
+/* set the style of the background movie */
+div.movieDiv>video {
+	height: 120%;
 	width: 100%;
 	border: 0;
 }

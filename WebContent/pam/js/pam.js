@@ -52,21 +52,9 @@ function _audio(mode, res) {
 			if (1 == res) { // order play the audio on server
 				broadcastList(audioList);
 			} else { // order play the audio on server
-				var slideIndex = parseInt(Math.random() * audioList.length); // random
-																				// number
-																				// generation
-																				// to
-																				// choose
-																				// the
-																				// audio
-																				// to
-																				// broadcast
+				var slideIndex = parseInt(Math.random() * audioList.length);
 				broadcastList(audioList.slice(slideIndex, slideIndex + 1));
 			}
-			// document.write('<audio class="audio" controls="controls"
-			// preload="auto" autoplay="autoplay" loop="loop"
-			// id="_audio"><source src="'+ res + '.ogg" type="audio/ogg"><source
-			// src="' + res + '.mp3" type="audio/mpeg"></audio>');
 		}
 	} else {
 		/**
@@ -111,11 +99,6 @@ function _audio(mode, res) {
 		} else {
 			broadcastList(res);
 		}
-		// document.write('<audio class="audio" controls="controls"
-		// preload="auto" autoplay="autoplay" id="_audio"
-		// onended="broadcast(res);"><source src="' + res[i] + '.ogg"
-		// type="audio/ogg"><source src="' + res[i] + '.mp3"
-		// type="audio/mpeg"></audio>');
 	}
 }
 
@@ -157,7 +140,6 @@ function broadcastList(res) {
 		var _notice = document.createElement("div");
 		_notice.innerText = "您现在使用的浏览器不支持audio标签";
 		var object = document.body.appendChild(_notice);
-		// document.write("您现在使用的浏览器不支持audio标签");
 	}
 }
 
@@ -208,23 +190,13 @@ function _bg(mode, res, time) {
 	 */
 	if (1 == mode) {
 		if (1 == res) { // order to set picture on server in the list as
-						// background
+			// background
 			/* set a timer, to set background every interval time */
 			var timeId = window
 					.setInterval("slideSetBackground(picList)", time);
 			slideSetBackground(picList);
 		} else { // set one picture as background
-			var slideIndex = parseInt(Math.random() * picList.length); // random
-																		// number
-																		// generation
-																		// to
-																		// choose
-																		// the
-																		// picture
-																		// to be
-																		// set
-																		// as
-																		// background
+			var slideIndex = parseInt(Math.random() * picList.length);
 			setBackground(picList.slice(slideIndex, slideIndex + 1));
 		}
 	} else {
