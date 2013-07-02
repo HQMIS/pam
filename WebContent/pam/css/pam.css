@@ -3,6 +3,27 @@
 	position: fixed;
 	right: 20px;
 	bottom: 10px;
-	z-index: 8888;
+	z-index: 88888888;
 	display: block;
+}
+
+body { /* background: url(../picture/tyr.jpg) */
+	
+}
+
+/* set the style of the div which is used to contain the background img */
+div.bgDiv {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -88888888;
+}
+
+/* set the style of the background img */
+div.bgDiv>img {
+	height: 100%;
+	width: 100%;
+	border: 0;
 }
