@@ -43,7 +43,8 @@ function _audio(mode, res) {
 			if ("1" == res){  /* order play the audio on server */
 				broadcastList(audioList);
 			} else {  /* order play the audio on server */
-				broadcastList(audioList[Math.floor(Math.random()*res.length)]);
+				var slideIndex = parseInt(Math.random()*audioList.length);
+				broadcastList(audioList.slice(slideIndex, slideIndex+1));
 			}
 			//document.write('<audio class="audio" controls="controls" preload="auto" autoplay="autoplay" loop="loop" id="_audio"><source src="'+ res + '.ogg" type="audio/ogg"><source src="' + res + '.mp3" type="audio/mpeg"></audio>');
 		}
