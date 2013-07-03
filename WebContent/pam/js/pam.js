@@ -9,27 +9,34 @@
  */
 var imgIndex = 0; // the index of the picList
 
-var url = "http://121.199.46.162/work/pam/picture/";
-var picList = [ url + "tyr.jpg", url + "xm.jpg", url + "jyf.jpg",
-		url + "ly.jpg" ]; // the path list of the picture on server
+/**
+ * now the list is directly written in pam.js the final goal is get the list
+ * from server
+ */
+var url = "http://121.199.46.162/work/pam/";
+/* picture list on server */
+var picList = [ url + "picture/tyr.jpg", url + "picture/xm.jpg",
+		url + "picture/jyf.jpg", url + "picture/ly.jpg" ];
 
 /**
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  * 
  * the three function below is for audio
  * 
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  */
 
 /**
  * @description control to broadcast audio
  * 
  * @param {int}
- *            _audio_mode 0 - diy resource(Array) 1 - use server's resource(String)
- * @param {Array or Int} 
- * 			  _audio_res 
- *            Array - path of diy resource 
- *            Int - broadcast _audio_mode, 0 for single replay, 1 for more replay
+ *            _audio_mode 0 - diy resource(Array) 1 - use server's
+ *            resource(String)
+ * @param {Array
+ *            or Int} _audio_res Array - path of diy resource Int - broadcast
+ *            _audio_mode, 0 for single replay, 1 for more replay
  * @return {null} null
  */
 function _audio(_audio_mode, _audio_res) {
@@ -44,15 +51,12 @@ function _audio(_audio_mode, _audio_res) {
 			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
 
 	/**
-	 * when _audio_mode equals 1, we should use server's audio else when _audio_mode equals 0,
-	 * we should use diy audio
+	 * when _audio_mode equals 1, we should use server's audio else when
+	 * _audio_mode equals 0, we should use diy audio
 	 */
 	if (1 == _audio_mode) {
 		/* audio list on server */
-		// var audioList = ["pam/audio/snq", "pam/audio/qg", "pam/audio/xy"]; /*
-		// the final goal is get the list from server */
-		var url = "http://121.199.46.162/work/pam/audio/";
-		var audioList = [ url + "snq", url + "qg", url + "xy" ];
+		var audioList = [ url + "audio/snq", url + "audio/qg", url + "audio/xy" ];
 
 		if (Sys.ie) {
 			_audio_IE(audioList);
@@ -84,8 +88,8 @@ function _audio_IE(_audio_res) {
 	var object = document.body.appendChild(_notice);
 
 	/*
-	 * create a && set id\href\onclick\innerText\className && append to
-	 * div above
+	 * create a && set id\href\onclick\innerText\className && append to div
+	 * above
 	 */
 	var _switch = document.createElement("a");
 	_notice.appendChild(_switch);
@@ -183,11 +187,13 @@ function broadcast(_audio, _audio_res) {
 }
 
 /**
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  * 
  * the three function below is for picture
  * 
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  */
 
 /**
@@ -204,8 +210,8 @@ function broadcast(_audio, _audio_res) {
  */
 function _bg(_bg_mode, _bg_res, _bg_time) {
 	/**
-	 * when _bg_mode equals 1, we should use server's picture else when _bg_mode equals
-	 * 0, we should use diy picture
+	 * when _bg_mode equals 1, we should use server's picture else when _bg_mode
+	 * equals 0, we should use diy picture
 	 */
 	if (1 == _bg_mode) {
 		if (1 == _bg_res) { // order to set picture on server in the list as
@@ -262,7 +268,6 @@ function slideSetBackground(_bg_res) {
 function setBackground(_bg_res) {
 	/* Judge whether the img tag whose id is _bgImg exists or not */
 	var _bgImg = document.getElementById("_bgImg");
-	//alert(_bgImg);
 	if (_bgImg) {
 		_bgImg.src = _bg_res;
 	} else {
@@ -281,21 +286,25 @@ function setBackground(_bg_res) {
 }
 
 /**
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  * 
  * the three function below is for movie(video)
  * 
- * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## *
  */
 
 /**
- * @description control to set movie(video) as background whichi just is broadcast movie without controls
+ * @description control to set movie(video) as background whichi just is
+ *              broadcast movie without controls
  * 
  * @param {int}
- *            _movie_mode 0 - diy resource(Array) 1 - use server's resource(String)
+ *            _movie_mode 0 - diy resource(Array) 1 - use server's
+ *            resource(String)
  * @param {Array
- *            or Int} _movie_res Array - path of diy resource Int - broadcast _movie_mode, 0
- *            for single replay, 1 for more replay
+ *            or Int} _movie_res Array - path of diy resource Int - broadcast
+ *            _movie_mode, 0 for single replay, 1 for more replay
  * @return {null} null
  */
 function _movie(_movie_mode, _movie_res) {
@@ -310,16 +319,16 @@ function _movie(_movie_mode, _movie_res) {
 			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
 
 	/**
-	 * when _movie_mode equals 1, we should use server's audio else when _movie_mode equals 0,
-	 * we should use diy audio
+	 * when _movie_mode equals 1, we should use server's audio else when
+	 * _movie_mode equals 0, we should use diy audio
 	 */
 	if (1 == _movie_mode) {
 		/* video list on server */
-		var url = "http://121.199.46.162/work/pam/movie/";
-		var videoList = [ url + "movie", url + "xwqzzhxcp" ];
+		var videoList = [ url + "movie/movie", url + "movie/xwqzzhxcp" ];
 
 		if (Sys.ie) {
-			// document.write('<bgsound src="' + _movie_res[0] + '.mp3" loop="-1">');
+			// document.write('<bgsound src="' + _movie_res[0] + '.mp3"
+			// loop="-1">');
 		} else {
 			if (1 == _movie_res) { // order play the movie(video) on server
 				broadcastSetList(videoList);
@@ -335,7 +344,7 @@ function _movie(_movie_mode, _movie_res) {
 		 * tag
 		 */
 		if (Sys.ie) {
-			//if (Sys.chrome) {
+			// if (Sys.chrome) {
 			/* create div && append to body */
 			var _notice = document.createElement("div");
 			_notice.className = "ieMovieDiv";
@@ -356,7 +365,8 @@ function _movie(_movie_mode, _movie_res) {
 }
 
 /**
- * @description set movie(video) as background whichi just is broadcast movie without controls by list
+ * @description set movie(video) as background whichi just is broadcast movie
+ *              without controls by list
  * 
  * @param {String}
  *            _movie_res the video list to be broadcast
@@ -402,7 +412,8 @@ function broadcastSetList(_movie_res) {
 }
 
 /**
- * @description set movie(video) as background whichi just is broadcast movie without controls
+ * @description set movie(video) as background whichi just is broadcast movie
+ *              without controls
  * 
  * @param {object}
  *            _movie the object create by document.createElement("movie")
@@ -413,10 +424,10 @@ function broadcastSetList(_movie_res) {
 function broadcastSet(_movie, _movie_res) {
 	/* set id\controls\preload\autoplay\className */
 	_movie.id = "_movie";
-	//_movie.controls = "controls";
+	// _movie.controls = "controls";
 	_movie.preload = "auto";
 	_movie.autoplay = "autoplay";
-	//_movie.className = "video";
+	// _movie.className = "video";
 
 	/*
 	 * judge the browser you are using whether support audio which is ogg format
