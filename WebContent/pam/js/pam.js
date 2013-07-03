@@ -20,12 +20,44 @@ var picList = [ url + "picture/tyr.jpg", url + "picture/xm.jpg",
 
 /**
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
+ * 
+ * the global function used for all feature
+ * 
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## ########## ########## ########## ########## ##########
+ */
+
+/**
+ * @description check the browser you are using
+ * 
+ * @param
+ * 
+ * @return {Object} Sys
+ */
+function browserCheck() {
+	/* check what browser you are using */
+	var Sys = {};
+	var ua = navigator.userAgent.toLowerCase();
+	var s;
+
+	(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua
+			.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua
+			.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua
+			.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] : (s = ua
+			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+
+	return Sys;
+}
+
+/**
+ * ########## ########## ########## ########## ########## ########## ##########
+ * ########## ########## ########## ########## ########## ########## ##########
  * 
  * the three function below is for audio
  * 
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
  */
 
 /**
@@ -40,15 +72,7 @@ var picList = [ url + "picture/tyr.jpg", url + "picture/xm.jpg",
  * @return {null} null
  */
 function _audio(_audio_mode, _audio_res) {
-	/* check what browser you are using */
-	var Sys = {};
-	var ua = navigator.userAgent.toLowerCase();
-	var a = ua.match(/msie ([\d.]+)/);
-	(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua
-			.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua
-			.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua
-			.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] : (s = ua
-			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+	var Sys = browserCheck();
 
 	/**
 	 * when _audio_mode equals 1, we should use server's audio else when
@@ -188,12 +212,12 @@ function broadcast(_audio, _audio_res) {
 
 /**
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
  * 
  * the three function below is for picture
  * 
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
  */
 
 /**
@@ -287,12 +311,12 @@ function setBackground(_bg_res) {
 
 /**
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
  * 
  * the three function below is for movie(video)
  * 
  * ########## ########## ########## ########## ########## ########## ##########
- * ########## ########## *
+ * ########## ########## ########## ########## ########## ########## ##########
  */
 
 /**
@@ -308,15 +332,7 @@ function setBackground(_bg_res) {
  * @return {null} null
  */
 function _movie(_movie_mode, _movie_res) {
-	/* check what browser you are using */
-	var Sys = {};
-	var ua = navigator.userAgent.toLowerCase();
-	var s;
-	(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua
-			.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua
-			.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua
-			.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] : (s = ua
-			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+	var Sys = browserCheck();
 
 	/**
 	 * when _movie_mode equals 1, we should use server's audio else when
