@@ -14,6 +14,14 @@ var picList = [ url + "tyr.jpg", url + "xm.jpg", url + "jyf.jpg",
 		url + "ly.jpg" ]; // the path list of the picture on server
 
 /**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the three function below is for audio
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+
+/**
  * @description control to broadcast audio
  * 
  * @param {int}
@@ -171,6 +179,16 @@ function broadcast(_audio, res) {
 	}
 }
 
+
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the three function below is for picture
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+
 /**
  * @description control to set background
  * 
@@ -250,4 +268,160 @@ function setBackground(res) {
 	var _bgImg = document.createElement("img");
 	_bgImg.src = res;
 	var object = _bgDiv.appendChild(_bgImg);
+}
+
+
+
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the three function below is for movie(video)
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+
+/**
+ * @description control to set movie(video) as background whichi just is broadcast movie without controls
+ * 
+ * @param {int}
+ *            mode 0 - diy resource(Array) 1 - use server's resource(String)
+ * @param {Array
+ *            or Int} res Array - path of diy resource Int - broadcast mode, 0
+ *            for single replay, 1 for more replay
+ * @return {null} null
+ */
+function _movie(mode, res) {
+	/* check what browser you are using */
+	var Sys = {};
+	var ua = navigator.userAgent.toLowerCase();
+	var s;
+	(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua
+			.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua
+			.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua
+			.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] : (s = ua
+			.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+
+	/**
+	 * when mode equals 1, we should use server's audio else when mode equals 0,
+	 * we should use diy audio
+	 */
+	if (1 == mode) {
+		/* video list on server */
+		var url = "http://121.199.46.162/work/pam/movie/";
+		var videoList = [ url + "movie", url + "xwqzzhxcp" ];
+
+		if (Sys.ie) {
+			// document.write('<bgsound src="' + res[0] + '.mp3" loop="-1">');
+		} else {
+			if (1 == res) { // order play the movie(video) on server
+				broadcastSetList(videoList);
+			} else { // order play the audio on server
+				var slideIndex = parseInt(Math.random() * videoList.length);
+				broadcastSetList(videoList.slice(slideIndex, slideIndex + 1));
+			}
+		}
+	} else {
+		/**
+		 * if statement deal with the browser which not support html5's video
+		 * tag else statement deal with the browser that support html5's video
+		 * tag
+		 */
+		if (Sys.ie) {
+		//if (Sys.chrome) {
+			/* create div && append to body */
+			var _notice = document.createElement("div");
+			_notice.className = "ieMovieDiv";
+			var object = document.body.appendChild(_notice);
+
+			/* create embed && set id\src\loop && append to div _notice */
+			var _embed = document.createElement("embed");
+			_embed.id = "_embed";
+			_embed.src = res[0] + ".avi";
+			_embed.autostart="true";
+			_embed.loop = "true";
+			_embed.className = "ieEmbed";
+			var object = _notice.appendChild(_embed);
+		} else {
+			broadcastSetList(res);
+		}
+	}
+}
+
+/**
+ * @description set movie(video) as background whichi just is broadcast movie without controls by list
+ * 
+ * @param {String}
+ *            res the video list to be broadcast
+ * @return {null} null
+ */
+function broadcastSetList(res) {
+	/* videoIndex is the index of resource array */
+	var videoIndex = 0;
+	/* create video */
+	var _video = document.createElement("video");
+
+	/**
+	 * judge the vedio and deal with if vedio is null or not can play, show the
+	 * notice else deal with the request
+	 */
+	if (_video != null && _video.canPlayType) {
+		/* append _movieDiv to body */
+		var _movieDiv = document.createElement("div");
+		_movieDiv.className = "movieDiv";
+		var object = document.body.appendChild(_movieDiv);
+		
+		/* append video to body */
+		var object = _movieDiv.appendChild(_video);
+
+		/* broadcat res[i] through video */
+		broadcastSet(_video, res[videoIndex++]);
+
+		/* add the callback function addEventListener to video's object */
+		_video.addEventListener('ended', function() {
+			/* judge the index of the video to be broadcast */
+			if (videoIndex >= res.length) {
+				videoIndex = 0;
+			}
+
+			/* broadcat res[i] through video */
+			broadcastSet(_video, res[videoIndex++]);
+		}, false);
+	} else {
+		var _notice = document.createElement("div");
+		_notice.innerText = "您现在使用的浏览器不支持video标签";
+		var object = document.body.appendChild(_notice);
+	}
+}
+
+/**
+ * @description set movie(video) as background whichi just is broadcast movie without controls
+ * 
+ * @param {object}
+ *            _movie the object create by document.createElement("movie")
+ * @param {String}
+ *            res the movie to be broadcast
+ * @return {null} null
+ */
+function broadcastSet(_movie, res) {
+	/* set id\controls\preload\autoplay\className */
+	_movie.id = "_movie";
+	//_movie.controls = "controls";
+	_movie.preload = "auto";
+	_movie.autoplay = "autoplay";
+	//_movie.className = "video";
+
+	/*
+	 * judge the browser you are using whether support audio which is ogg format
+	 * or not && select the suitable format's audio to be broadcast
+	 * 
+	 * mp4 is much smaller than ogv, so make mp4 header
+	 */
+	if (_movie.canPlayType("video/mp4")) {
+		_movie.src = res + ".mp4";
+	} else if (_movie.canPlayType("video/ogg")) {
+		_movie.src = res + ".ogv";
+	} else if (_movie.canPlayType("video/webM")) {
+		_movie.src = res + ".webm";
+	}
 }
