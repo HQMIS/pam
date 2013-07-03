@@ -47,7 +47,6 @@ function _audio(mode, res) {
 	 * we should use diy audio
 	 */
 	if (1 == mode) {
-		// alert(window.location.href);
 		/* audio list on server */
 		// var audioList = ["pam/audio/snq", "pam/audio/qg", "pam/audio/xy"]; /*
 		// the final goal is get the list from server */
@@ -55,7 +54,7 @@ function _audio(mode, res) {
 		var audioList = [ url + "snq", url + "qg", url + "xy" ];
 
 		if (Sys.ie) {
-			// document.write('<bgsound src="' + res[0] + '.mp3" loop="-1">');
+			_audio_IE(audioList);
 		} else {
 			if (1 == res) { // order play the audio on server
 				broadcastList(audioList);
@@ -71,43 +70,46 @@ function _audio(mode, res) {
 		 * tag
 		 */
 		if (Sys.ie) {
-			/* create div && append to body */
-			var _notice = document.createElement("div");
-			var object = document.body.appendChild(_notice);
-
-			/*
-			 * create a && set id\href\onclick\innerText\className && append to
-			 * div above
-			 */
-			var _switch = document.createElement("a");
-			_notice.appendChild(_switch);
-			_switch.id = "_switch";
-			_switch.href = "javascript:void(0);";
-			_switch.onclick = function(stop) {
-				var _bgsound = document.getElementById("_bgsound");
-				/* judge the text of the _switch and deal with */
-				if ("关闭背景音乐" == document.getElementById("_switch").innerHTML) {
-					_bgsound.src = "";
-					_switch.innerText = "打开背景音乐";
-				} else {
-					_bgsound.src = res[0] + ".mp3";
-					_switch.innerText = "关闭背景音乐";
-				}
-			};
-			_switch.innerText = "关闭背景音乐";
-			_switch.className = "switch";
-
-			/* create bgsound && set id\src\loop && append to body */
-			var _bgsound = document.createElement("bgsound");
-			_bgsound.id = "_bgsound";
-			_bgsound.src = res[0] + ".mp3";
-			_bgsound.loop = -1;
-			var object = document.body.appendChild(_bgsound);
-			// document.write('<bgsound src="' + res[0] + '.mp3" loop="-1">');
+			_audio_IE(res);
 		} else {
 			broadcastList(res);
 		}
 	}
+}
+
+function _audio_IE(res){
+	/* create div && append to body */
+	var _notice = document.createElement("div");
+	var object = document.body.appendChild(_notice);
+
+	/*
+	 * create a && set id\href\onclick\innerText\className && append to
+	 * div above
+	 */
+	var _switch = document.createElement("a");
+	_notice.appendChild(_switch);
+	_switch.id = "_switch";
+	_switch.href = "javascript:void(0);";
+	_switch.onclick = function(stop) {
+		var _bgsound = document.getElementById("_bgsound");
+		/* judge the text of the _switch and deal with */
+		if ("关闭背景音乐" == document.getElementById("_switch").innerHTML) {
+			_bgsound.src = "";
+			_switch.innerText = "打开背景音乐";
+		} else {
+			_bgsound.src = res[0] + ".mp3";
+			_switch.innerText = "关闭背景音乐";
+		}
+	};
+	_switch.innerText = "关闭背景音乐";
+	_switch.className = "switch";
+
+	/* create bgsound && set id\src\loop && append to body */
+	var _bgsound = document.createElement("bgsound");
+	_bgsound.id = "_bgsound";
+	_bgsound.src = res[0] + ".mp3";
+	_bgsound.loop = -1;
+	var object = document.body.appendChild(_bgsound);
 }
 
 /**
