@@ -81,7 +81,7 @@ function _audio(_audio_mode, _audio_res) {
 	if (1 == _audio_mode) {
 		/* audio list on server */
 		var audioList = [ url + "audio/snq", url + "audio/qg", url + "audio/xy" ];
-		
+
 		if (parseInt(Sys.ie.split(".")[0]) < 9) {
 			_audio_IE(audioList);
 		} else {
@@ -98,7 +98,7 @@ function _audio(_audio_mode, _audio_res) {
 		 * tag else statement deal with the browser that support html5's audio
 		 * tag
 		 */
-		if (parseInt(Sys.ie.split(".")[0]) < 9) {
+		if (Sys.ie && parseInt(Sys.ie.split(".")[0]) < 9) {
 			_audio_IE(_audio_res);
 		} else {
 			broadcastList(_audio_res);
@@ -342,7 +342,7 @@ function _movie(_movie_mode, _movie_res) {
 		/* video list on server */
 		var videoList = [ url + "movie/movie", url + "movie/xwqzzhxcp" ];
 
-		if (parseInt(Sys.ie.split(".")[0]) < 9) {
+		if (Sys.ie && parseInt(Sys.ie.split(".")[0]) < 9) {
 			// document.write('<bgsound src="' + _movie_res[0] + '.mp3"
 			// loop="-1">');
 		} else {
@@ -359,7 +359,7 @@ function _movie(_movie_mode, _movie_res) {
 		 * tag else statement deal with the browser that support html5's video
 		 * tag
 		 */
-		if (parseInt(Sys.ie.split(".")[0]) < 9) {
+		if (Sys.ie && parseInt(Sys.ie.split(".")[0]) < 9) {
 			/* create div && append to body */
 			var _notice = document.createElement("div");
 			_notice.className = "ieMovieDiv";
