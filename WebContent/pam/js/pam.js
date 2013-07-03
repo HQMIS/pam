@@ -81,8 +81,8 @@ function _audio(_audio_mode, _audio_res) {
 	if (1 == _audio_mode) {
 		/* audio list on server */
 		var audioList = [ url + "audio/snq", url + "audio/qg", url + "audio/xy" ];
-
-		if (Sys.ie) {
+		
+		if (parseInt(Sys.ie.split(".")[0]) < 9) {
 			_audio_IE(audioList);
 		} else {
 			if (1 == _audio_res) { // order play the audio on server
@@ -98,7 +98,7 @@ function _audio(_audio_mode, _audio_res) {
 		 * tag else statement deal with the browser that support html5's audio
 		 * tag
 		 */
-		if (Sys.ie) {
+		if (parseInt(Sys.ie.split(".")[0]) < 9) {
 			_audio_IE(_audio_res);
 		} else {
 			broadcastList(_audio_res);
@@ -342,7 +342,7 @@ function _movie(_movie_mode, _movie_res) {
 		/* video list on server */
 		var videoList = [ url + "movie/movie", url + "movie/xwqzzhxcp" ];
 
-		if (Sys.ie) {
+		if (parseInt(Sys.ie.split(".")[0]) < 9) {
 			// document.write('<bgsound src="' + _movie_res[0] + '.mp3"
 			// loop="-1">');
 		} else {
@@ -359,8 +359,7 @@ function _movie(_movie_mode, _movie_res) {
 		 * tag else statement deal with the browser that support html5's video
 		 * tag
 		 */
-		if (Sys.ie) {
-			// if (Sys.chrome) {
+		if (parseInt(Sys.ie.split(".")[0]) < 9) {
 			/* create div && append to body */
 			var _notice = document.createElement("div");
 			_notice.className = "ieMovieDiv";
