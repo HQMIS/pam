@@ -28,11 +28,10 @@
 		</video>
 	</div> -->
 
-	<div class="movieDiv">
-		<!-- <bgsound loop="infinite" src="movies/movie.mp4"> -->
-		<embed src="movies/movie.avi" autostart="true" loop="true" width=800
-			height=500>
-	</div>
+	<!-- <div class="movieDiv">
+		<bgsound loop="infinite" src="movies/movie.mp4">
+		<embed src="movies/movie.avi" autostart="true" loop="infinite" playcount="true" width=800 height=500>
+	</div> -->
 
 	<div class="Div">
 		<center>
@@ -54,11 +53,11 @@
 	</div>
 	
 	<script>
-		//var res = ["images/xjqxz5.jpg", "images/gif.gif"];
-		//_bg(0, res, 10000); /* 自定义res */
+		var res = ["images/xjqxz5.jpg", "images/gif.gif"];
+		_bg(0, res, 10000); /* 自定义res */
 		//_bg(1, 1, 10000); /* 使用Server，0 - 单？1 - 多(间隔时间)？ */
 
-		var res = [ "movies/movie" ];
+		//var res = [ "movies/movie" ];
 		//_movie(0, res);
 
 		//var res = ["musics/music", "musics/snq"];

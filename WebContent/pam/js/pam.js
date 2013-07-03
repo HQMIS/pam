@@ -35,7 +35,7 @@ function _audio(mode, res) {
 	/* check what browser you are using */
 	var Sys = {};
 	var ua = navigator.userAgent.toLowerCase();
-	var s;
+	var a = ua.match(/msie ([\d.]+)/);
 	(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] : (s = ua
 			.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] : (s = ua
 			.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] : (s = ua
@@ -258,16 +258,24 @@ function slideSetBackground(res) {
  * @return {null} null
  */
 function setBackground(res) {
-	/* create div && set id\className && append to body */
-	var _bgDiv = document.createElement("div");
-	_bgDiv.id = "bgDiv";
-	_bgDiv.className = "bgDiv";
-	var object = document.body.appendChild(_bgDiv);
+	/* Judge whether the img tag whose id is _bgImg exists or not */
+	var _bgImg = document.getElementById("_bgImg");
+	//alert(_bgImg);
+	if (_bgImg){
+		_bgImg.src = res;
+	} else{
+		/* create div && set id\className && append to body */
+		var _bgDiv = document.createElement("div");
+		_bgDiv.id = "bgDiv";
+		_bgDiv.className = "bgDiv";
+		var object = document.body.appendChild(_bgDiv);
 
-	/* create img && set src && append to div above */
-	var _bgImg = document.createElement("img");
-	_bgImg.src = res;
-	var object = _bgDiv.appendChild(_bgImg);
+		/* create img && set src && append to div above */
+		var _bgImg = document.createElement("img");
+		_bgImg.id = "_bgImg";
+		_bgImg.src = res;
+		var object = _bgDiv.appendChild(_bgImg);
+	}
 }
 
 
@@ -338,8 +346,8 @@ function _movie(mode, res) {
 			var _embed = document.createElement("embed");
 			_embed.id = "_embed";
 			_embed.src = res[0] + ".avi";
-			_embed.autostart="true";
-			_embed.loop = "true";
+			_embed.autostart = true;
+			_embed.loop = true;
 			_embed.className = "ieEmbed";
 			var object = _notice.appendChild(_embed);
 		} else {
