@@ -10,60 +10,66 @@
 <html>
 <head>
 <link rel=stylesheet type=text/css href="<%=path%>/pam/css/pam.css">
+<link rel=stylesheet type=text/css href="<%=path%>/css/pamDemo.css">
 <script language="javascript" type="text/javascript"
 	src="<%=path%>/pam/js/pam.js"></script>
 </head>
 
 <body>
-	<!-- <div class="bgDiv">
-		<img src="images/xjqxz5.jpg" />
-	</div> -->
-
-	<!-- <div class="movieDiv">
-		<video id="_video" loop autoplay poster="video.jpg">
-			<source src="movies/movie.mp4" type="video/mp4"></source>
-			<source src="movies/movie.webm" type="video/webM"></source>
-			<source src="movies/movie.ogv" type="video/ogg"></source>
-			<p>Your browser does not support the video tag.</p>
-		</video>
-	</div> -->
-
-	<!-- <div class="movieDiv">
-		<bgsound loop="infinite" src="movies/movie.mp4">
-		<embed src="movies/movie.avi" autostart="true" loop="infinite" playcount="true" width=800 height=500>
-	</div> -->
-
 	<div class="Div">
-		<center>
-			<h1>
-				<font color="red" face="楷体_GB2312">欢迎使用pam.js</FONT>
-			</h1>
-		</center>
-		<center>
-			<a href="p.jsp">
-				<font color="red" face="楷体_GB2312">>>Picture</FONT>
-			</a>
-			<a href="a.jsp">
-				<font color="red" face="楷体_GB2312">>>Audio</FONT>
-			</a>
-			<a href="m.jsp">
-				<font color="red" face="楷体_GB2312">>>Movie</FONT>
-			</a>
-		</center>
+		<div class="wapper">
+			<div class="centerPosition">
+				<h1>
+					<a href="index.jsp" class="pamFont">欢迎使用pam.js</a>
+				</h1>
+			</div>
+
+			<div class="centerPosition">
+				<a href="p.jsp" class="pamFont"> >>Picture </a>
+			</div>
+			<div>
+				<ul>
+					<li class="pamFont">使用Local图片，直接调用_bg，参数1为本地的标识(0-Local，1-Server)，参数2为存放本地图片路径的数组，参数3为图片替换的间隔时间，单位：ms(如果参数2数组长度为1，则参数3随意，pam.js中不检查)</li>
+					<div>
+						<code> </code>
+					</div>
+					<div>
+						<code>var res = ["images/xjqxz5.jpg", "images/gif.gif"];</code>
+					</div>
+					<div>
+						<code>_bg(0, res, 10000);</code>
+					</div>
+					<li class="pamFont">使用Server图片，直接调用_bg，参数1为Server的标识(0-Local，1-Server)，参数2为单播还是组播的标识(0-单，1-组)，参数3为图片替换的间隔时间，单位：ms(如果参数2为0，则参数2随意，pam.js中不检查)</li>
+					<div>
+						<code>_bg(1, 1, 10000);</code>
+					</div>
+				</ul>
+
+
+			</div>
+
+			<div class="centerPosition">
+				<a href="a.jsp" class="pamFont"> >>Audio </a>
+			</div>
+
+			<div class="centerPosition">
+				<a href="m.jsp" class="pamFont"> >>Movie </a>
+			</div>
+		</div>
 	</div>
-	
+
 	<script>
-		var res = ["images/xjqxz5.jpg", "images/gif.gif"];
-		_bg(0, res, 10000); /* 自定义res */
-		//_bg(1, 1, 10000); /* 使用Server，0 - 单？1 - 多(间隔时间)？ */
+		var res = [ "images/xjqxz5.jpg", "images/gif.gif" ];
+		_bg(0, res, 10000);
+		//_bg(1, 1, 10000);
 
 		//var res = [ "movies/movie" ];
 		//_movie(0, res);
 
 		//var res = ["musics/music", "musics/snq"];
 		//var res = ["musics/music"];
-		//_audio(0, res); /* 自定义res */
-		_audio(1, 1); /* 使用Server，0 - 单？1 - 多？ */
+		//_audio(0, res);
+		_audio(1, 1);
 	</script>
 </body>
 </html>

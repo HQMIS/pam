@@ -89,17 +89,19 @@ function _bg(_bg_mode, _bg_res, _bg_time) {
 			setBackground(picList.slice(slideIndex, slideIndex + 1));
 		}
 	} else {
-		if (1 == _bg_res.length) {
+		picList = _bg_res;
+		
+		if (1 == picList.length) {
 			/*
 			 * the length of the array is 1, direct set the picture index which
 			 * index is 0 as background
 			 */
-			setBackground(_bg_res[0]);
+			setBackground(picList[0]);
 		} else {
 			/* set a timer, to set background every interval time */
-			var timeId = window.setInterval("slideSetBackground(_bg_res)",
+			var timeId = window.setInterval("slideSetBackground(picList)",
 					_bg_time);
-			slideSetBackground(_bg_res);
+			slideSetBackground(picList);
 		}
 	}
 }

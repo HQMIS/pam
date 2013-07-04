@@ -1,0 +1,21 @@
+.wapper {
+	margin: 0px auto;
+	width: 700px;
+}
+
+.centerPosition {
+	text-align: center;
+}
+
+.pamFont {
+	font-family: 楷体_GB2312;
+	color: red;
+}
+
+a:link,a:visited {
+	text-decoration: none; /*超链接无下划线*/
+}
+
+a:hover {
+	text-decoration: underline; /*鼠标放上去有下划线*/
+}
