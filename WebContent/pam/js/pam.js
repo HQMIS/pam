@@ -181,7 +181,7 @@ function _audio(_audio_mode, _audio_res) {
 		/* audio list on server */
 		var audioList = [ url + "audio/snq", url + "audio/qg", url + "audio/xy" ];
 
-		if (parseInt(Sys.ie.split(".")[0]) < 9) {
+		if (Sys.ie && parseInt(Sys.ie.split(".")[0]) < 9) {
 			_audio_IE(audioList);
 		} else {
 			if (1 == _audio_res) { // order play the audio on server
